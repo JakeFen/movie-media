@@ -12,6 +12,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(req.method, req.path);
+  next();
+});
+
 // Routes
 app.use("/api/user", userRoutes);
 app.use("/api/reviews", reviewRoutes);

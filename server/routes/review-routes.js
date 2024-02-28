@@ -2,14 +2,16 @@ const express = require("express");
 const {
   getReviews,
   getReview,
-  postReview,
   deleteReview,
   updateReview,
+  createReview,
 } = require("../controllers/review-controller");
+const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all review routes
+// require auth for all workout routes
+router.use(requireAuth);
 
 // GET all reviews
 router.get("/", getReviews);
@@ -18,7 +20,7 @@ router.get("/", getReviews);
 router.get("/:id", getReview);
 
 // POST review
-router.post("/", postReview);
+router.post("/", createReview);
 
 // DELETE review
 router.delete("/:id", deleteReview);

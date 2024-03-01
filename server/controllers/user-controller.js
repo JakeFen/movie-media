@@ -17,6 +17,7 @@ const loginUser = async (req, res) => {
 
     // Extract necessary user data
     const userData = {
+      _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
@@ -40,6 +41,7 @@ const signupUser = async (req, res) => {
 
     // Extract necessary user data
     const userData = {
+      _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

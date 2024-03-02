@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useState } from "react";
+
+// Pages
 import Home from "../pages/home/home";
 import SignIn from "../pages/sign-in/sign-in";
 import NotFound from "../pages/notFound/not-found";
-import { useState } from "react";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useAuthContext();
 
   return (
     <div>

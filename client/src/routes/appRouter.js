@@ -8,14 +8,13 @@ import SignIn from "../pages/sign-in/sign-in";
 import NotFound from "../pages/notFound/not-found";
 
 function AppRouter() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user } = useAuthContext();
 
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          {isLoggedIn ? (
+          {user ? (
             <Route path="/" element={<Home />}></Route>
           ) : (
             <Route path="/" element={<SignIn />}></Route>

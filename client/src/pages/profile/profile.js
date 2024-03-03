@@ -1,7 +1,7 @@
 function Profile() {
   return (
-    <div>
-      <p>Profile</p>
+    <div className="background--primary page-container">
+      <p className="text-white">Profile</p>
     </div>
   );
 }

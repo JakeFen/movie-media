@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div className="background--primary page-container">
-      <p>Home</p>
+      <p className="text-white">Home</p>
       <Button onClick={logout}>Logout</Button>
     </div>
   );

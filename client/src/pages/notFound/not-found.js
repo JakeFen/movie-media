@@ -1,6 +1,6 @@
 function NotFound() {
   return (
-    <div className="background--primary page-container">
+    <div className="page-container">
       <p>NotFound</p>
     </div>
   );

@@ -1,6 +1,6 @@
 function Profile() {
   return (
-    <div className="background--primary page-container">
+    <div className="page-container">
       <p className="text-white">Profile</p>
     </div>
   );

@@ -175,11 +175,10 @@ table {
   min-height: 100vh;
 }
 
-.background {
-  &--primary {
-    background-color: #252525;
-  }
-  &--secondary {
-    background-color: #161616;
-  }
+body {
+  background-color: #161616 !important;
+}
+
+.container {
+  min-height: 100vh;
 }

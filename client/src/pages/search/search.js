@@ -2,9 +2,13 @@ import "./search.styles.scss";
 import { useEffect, useState } from "react";
 import { useMovieSearch } from "../../hooks/useMovieSearch";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Search() {
   const [query, setQuery] = useState("");
+  const [displayMovieCount, setDisplayMovieCount] = useState(5);
+  const [displayShowCount, setDisplayShowCount] = useState(5);
+
   const {
     movieSearch,
     trendingMoviesSearch,
@@ -33,12 +37,16 @@ function Search() {
     return () => clearTimeout(timer);
   }, [query]);
 
-  useEffect(() => {
-    console.log(trendingMovies);
-  }, [trendingMovies]);
+  const loadMoreMovies = () => {
+    setDisplayMovieCount((prevCount) => prevCount + 5);
+  };
+
+  const loadMoreShows = () => {
+    setDisplayShowCount((prevCount) => prevCount + 5);
+  };
 
   return (
-    <div className="background--primary page-container">
+    <div className="page-container container">
       <p className="text-white">Search</p>
 
       <Form.Control
@@ -51,11 +59,11 @@ function Search() {
       />
 
       <div className="trending__container">
-        <div className="trending__movies">
-          <p className="text-white">Trending Movies</p>
-          <div className="flex flex-row flex-wrap">
-            {trendingMovies.map((movie, index) => (
-              <div key={index}>
+        <div className="flex flex-col trending__movies">
+          <h3 className="text-white text-left">Trending Movies</h3>
+          <ul className="flex flex-row flex-wrap justify-center poster__container">
+            {trendingMovies.slice(0, displayMovieCount).map((movie, index) => (
+              <li key={index}>
                 <img
                   className="poster"
                   src={
@@ -63,17 +71,26 @@ function Search() {
                   }
                   alt=""
                 />
-                {/* <p className="text-white">{movie.original_title}</p> */}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+          {trendingMovies.length > displayMovieCount && (
+            <Button
+              className="no-underline self-center"
+              size="sm"
+              variant="link"
+              onClick={loadMoreMovies}
+            >
+              Load More
+            </Button>
+          )}
         </div>
 
-        <div className="trending__shows">
-          <p className="text-white">Trending Shows</p>
-          <div className="flex flex-row flex-wrap">
-            {trendingShows.map((show, index) => (
-              <div key={index}>
+        <div className="flex flex-col trending__shows">
+          <h3 className="text-white text-left">Trending Shows</h3>
+          <ul className="flex flex-row flex-wrap justify-center poster__container">
+            {trendingShows.slice(0, displayShowCount).map((show, index) => (
+              <li key={index}>
                 <img
                   className="poster"
                   src={
@@ -81,10 +98,19 @@ function Search() {
                   }
                   alt=""
                 />
-                {/* <p className="text-white">{show.original_title}</p> */}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+          {trendingShows.length > displayShowCount && (
+            <Button
+              className="no-underline self-center"
+              size="sm"
+              variant="link"
+              onClick={loadMoreShows}
+            >
+              Load More
+            </Button>
+          )}
         </div>
       </div>
     </div>

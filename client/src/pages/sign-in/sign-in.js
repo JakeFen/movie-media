@@ -12,13 +12,13 @@ function SignIn() {
   };
 
   return (
-    <div className="background--secondary page-container">
+    <div className="container">
       <div className="image-container">
         <img src={Splash} alt="slash image" />
         <div className="gradient-bottom"></div>
       </div>
 
-      <div className="container">
+      <div>
         {showLoginForm ? (
           <Login toggleForm={toggleForm} />
         ) : (

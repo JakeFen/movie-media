@@ -5,7 +5,7 @@ function Home() {
   const { logout } = useLogout();
 
   return (
-    <div className="background--primary page-container">
+    <div className="page-container">
       <p className="text-white">Home</p>
       <Button onClick={logout}>Logout</Button>
     </div>

@@ -9,8 +9,6 @@ const createToken = (_id) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log("testing:: ", req.body);
-
   try {
     const user = await User.login({ email, password });
 

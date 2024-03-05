@@ -1,7 +1,7 @@
 function Profile() {
   return (
     <div className="page-container">
-      <p className="text-white">Profile</p>
+      <p className="text-slate-100">Profile</p>
     </div>
   );
 }

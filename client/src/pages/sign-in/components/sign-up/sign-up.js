@@ -65,7 +65,7 @@ function SignUp({ toggleForm }) {
         <Button className="w-full mb-2" type="submit" variant="success">
           Sign Up
         </Button>
-        {error && <p className="text-white">{error}</p>}
+        {error && <p className="text-slate-100">{error}</p>}
       </form>
       <div className="extra-btns">
         <Button

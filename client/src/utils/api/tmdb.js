@@ -63,8 +63,20 @@ export const fetchSearchMovies = async (query) => {
     },
   };
 
-  fetch("https://api.themoviedb.org/3/trending/all/day?language=en-US", options)
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&language=en-US&region=United%20States`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch trending movies");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };

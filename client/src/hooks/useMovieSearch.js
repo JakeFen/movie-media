@@ -33,10 +33,15 @@ export const useMovieSearch = () => {
 
   // Run this and update movies state when a movie is searched
   const movieSearch = async (query) => {
-    setLoading(true);
-    const data = await fetchSearchMovies(query);
-    setMovies(data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const data = await fetchSearchMovies(query);
+
+      setMovies(data);
+      setLoading(false);
+    } catch (error) {
+      setError("Error fetching movies ", error);
+    }
   };
 
   return {

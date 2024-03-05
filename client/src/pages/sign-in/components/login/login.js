@@ -38,7 +38,7 @@ function Login({ toggleForm }) {
         <Button className="w-full mb-2" type="submit" variant="success">
           Log In
         </Button>
-        {error && <p className="text-white">{error}</p>}
+        {error && <p className="text-slate-100">{error}</p>}
       </form>
       <div className="extra-btns">
         <Button className="w-full no-underline" size="sm" variant="link">

@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div className="page-container">
-      <p className="text-white">Home</p>
+      <p className="text-slate-100">Home</p>
       <Button onClick={logout}>Logout</Button>
     </div>
   );

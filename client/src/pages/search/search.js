@@ -46,7 +46,7 @@ function Search() {
   };
 
   return (
-    <div className="page-container container">
+    <div className="page-container container mt-[30px]">
       <Form.Control
         className="form__control mb-6"
         id="search"
@@ -56,7 +56,7 @@ function Search() {
         value={query}
       />
       {movies?.length === 0 || query.length <= 2 ? (
-        <div className="trending__container mt-[50px] mb-2">
+        <div className="trending__container mt-[30px] mb-2">
           <div className="flex flex-col trending__movies">
             <h2 className="text-slate-100 text-left">Trending Movies</h2>
             <ul className="flex flex-row flex-wrap justify-center poster__container">

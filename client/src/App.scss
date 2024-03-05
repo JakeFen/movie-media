@@ -171,14 +171,12 @@ table {
   text-decoration: none !important;
 }
 
-.page-container {
-  min-height: 100vh;
-}
-
 body {
   background-color: #161616 !important;
 }
 
-.container {
-  min-height: 100vh;
+@media (max-width: 768px) {
+  body {
+    margin-bottom: 50px !important;
+  }
 }

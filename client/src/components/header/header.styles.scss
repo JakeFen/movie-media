@@ -1,0 +1,33 @@
+.header {
+  background-color: #252525;
+
+  &__logo {
+    font-size: 24px;
+    font-weight: 500;
+    color: #cccccc;
+
+    &:hover {
+      color: #dddddd;
+    }
+    &:active {
+      color: #aaaaaa;
+    }
+  }
+
+  &__link {
+    font-weight: 500;
+    margin-left: 28px;
+    color: #cccccc;
+
+    &:hover {
+      color: #dddddd;
+    }
+    &:active {
+      color: #aaaaaa;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

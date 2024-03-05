@@ -1,0 +1,15 @@
+.mobile-nav {
+  background-color: #252525;
+}
+
+a {
+  width: 100%;
+  padding: 12px 0;
+  line-height: 1;
+
+  &:active {
+    span {
+      font-size: 20px;
+    }
+  }
+}

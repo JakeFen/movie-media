@@ -1,17 +1,19 @@
+import "./mobile-nav.styles.scss";
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 
 function MobileNav() {
   return (
-    <div>
+    <div className="mobile-nav flex items-center place-content-around">
       <Link to="/search">
-        <Button>Search</Button>
+        <span class="material-symbols-outlined text-slate-100">search</span>
       </Link>
       <Link to="/">
-        <Button>Feed</Button>
+        <span class="material-symbols-outlined text-slate-100">add_circle</span>
       </Link>
       <Link to="/profile">
-        <Button>Profile</Button>
+        <span class="material-symbols-outlined text-slate-100">
+          account_circle
+        </span>
       </Link>
     </div>
   );

@@ -27,6 +27,16 @@
     }
   }
 
+  &__profile-btn {
+    display: flex !important;
+    gap: 8px;
+  }
+
+  &__dropdown-item {
+    display: flex !important;
+    gap: 12px;
+  }
+
   a {
     text-decoration: none;
   }

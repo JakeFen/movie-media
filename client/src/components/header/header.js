@@ -4,8 +4,10 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Header() {
+  const { user } = useAuthContext();
   const { logout } = useLogout();
 
   return (
@@ -29,8 +31,15 @@ function Header() {
           </li>
           <li className="ml-[28px]">
             <Dropdown as={ButtonGroup} size="md">
-              <Button href="/profile" variant="success">
-                Split Button
+              <Button
+                href="/profile"
+                variant="success"
+                className="header__profile-btn"
+              >
+                <span class="material-symbols-outlined text-slate-100">
+                  account_circle
+                </span>
+                {user.userData.firstName} {user.userData.lastName}
               </Button>
 
               <Dropdown.Toggle
@@ -40,11 +49,37 @@ function Header() {
               />
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                <Dropdown.Item href="/" onClick={logout}>
-                  Logout
+                <Dropdown.Item
+                  href="/profile"
+                  className="header__dropdown-item"
+                >
+                  Profile
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="/user/following"
+                  className="header__dropdown-item"
+                >
+                  Following
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="/user/watched"
+                  className="header__dropdown-item"
+                >
+                  Watched
+                </Dropdown.Item>
+                <hr className="m-1" />
+                <Dropdown.Item
+                  href="/user/settings"
+                  className="header__dropdown-item"
+                >
+                  Settings
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="/"
+                  onClick={logout}
+                  className="header__dropdown-item"
+                >
+                  Sign Out
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

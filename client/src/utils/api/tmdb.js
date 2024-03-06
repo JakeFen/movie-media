@@ -15,14 +15,33 @@ export const fetchTrendingMovies = async () => {
       options
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch trending movies");
-    }
+    if (!response.ok) throw new Error("Failed to fetch trending movies");
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchGenres = async () => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${TMDB_API_KEY}`,
+    },
+  };
+
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/genre/movie/list?language=en",
+      options
+    );
+
+    if (!response.ok) throw new Error("Failed to fetch trending genres");
+
+    return await response.json();
+  } catch (error) {
     throw error;
   }
 };
@@ -42,14 +61,10 @@ export const fetchTrendingShows = async (query) => {
       options
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch trending movies");
-    }
+    if (!response.ok) throw new Error("Failed to fetch trending movies");
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -69,14 +84,10 @@ export const fetchSearchMovies = async (query) => {
       options
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch trending movies");
-    }
+    if (!response.ok) throw new Error("Failed to fetch trending movies");
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

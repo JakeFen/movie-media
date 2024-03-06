@@ -36,7 +36,7 @@ function Header() {
                 variant="success"
                 className="header__profile-btn"
               >
-                <span class="material-symbols-outlined text-slate-100">
+                <span className="material-symbols-outlined text-slate-100">
                   account_circle
                 </span>
                 {user.userData.firstName} {user.userData.lastName}

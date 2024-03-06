@@ -3,22 +3,57 @@ import { useEffect, useState } from "react";
 import { useMovieSearch } from "../../hooks/useMovieSearch";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 function Search() {
   const [query, setQuery] = useState("");
   const [displayMovieCount, setDisplayMovieCount] = useState(5);
   const [displayShowCount, setDisplayShowCount] = useState(5);
+  const [selectedFilm, setSelectedFilm] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setSelectedFilm(null);
+    setShow(false);
+  };
+  const handleShow = (film) => {
+    setSelectedFilm(film);
+    setShow(true);
+  };
 
   const {
     movieSearch,
     trendingMoviesSearch,
     trendingShowsSearch,
+    getGenres,
     trendingMovies,
     trendingShows,
     movies,
+    genres,
     loading,
     error,
   } = useMovieSearch();
+
+  const loadMoreMovies = () => {
+    setDisplayMovieCount((prevCount) => prevCount + 5);
+  };
+
+  const loadMoreShows = () => {
+    setDisplayShowCount((prevCount) => prevCount + 5);
+  };
+
+  const getSelectedGenres = (genre_ids) => {
+    return genre_ids.reduce((acc, genreId, index) => {
+      const matchedGenre = genres.find((genre) => genre.id === genreId);
+      if (matchedGenre) {
+        acc += matchedGenre.name;
+        if (index !== genre_ids.length - 1) {
+          acc += ", ";
+        }
+      }
+      return acc;
+    }, "");
+  };
 
   useEffect(() => {
     let timer;
@@ -37,13 +72,10 @@ function Search() {
     return () => clearTimeout(timer);
   }, [query]);
 
-  const loadMoreMovies = () => {
-    setDisplayMovieCount((prevCount) => prevCount + 5);
-  };
-
-  const loadMoreShows = () => {
-    setDisplayShowCount((prevCount) => prevCount + 5);
-  };
+  // Get Genres On Load
+  useEffect(() => {
+    getGenres();
+  }, []);
 
   return (
     <div className="page-container container mt-[30px]">
@@ -63,7 +95,7 @@ function Search() {
               {trendingMovies
                 .slice(0, displayMovieCount)
                 .map((movie, index) => (
-                  <li key={index}>
+                  <li key={index} onClick={() => handleShow(movie)}>
                     <img
                       className="poster"
                       src={
@@ -91,7 +123,7 @@ function Search() {
             <h2 className="text-slate-100 text-left">Trending Shows</h2>
             <ul className="flex flex-row flex-wrap justify-center poster__container">
               {trendingShows.slice(0, displayShowCount).map((show, index) => (
-                <li key={index}>
+                <li key={index} onClick={() => handleShow(show)}>
                   <img
                     className="poster"
                     src={
@@ -153,7 +185,67 @@ function Search() {
           </ul>
         </div>
       )}
-      {/* {movies?.length === 0 && query.length > 2 && <div>No movies found</div>} */}
+
+      {selectedFilm && (
+        <Modal show={show} onHide={handleClose} className="search__modal">
+          <Modal.Header closeButton>
+            <img
+              className=""
+              src={
+                "https://image.tmdb.org/t/p/original/" +
+                selectedFilm.backdrop_path
+              }
+              alt="movie backdrop"
+            />
+          </Modal.Header>
+          <Modal.Body>
+            <div className="flex items-center gap-3 text-white">
+              <div>
+                <img
+                  className="w-[100px]"
+                  src={
+                    "https://image.tmdb.org/t/p/original/" +
+                    selectedFilm.poster_path
+                  }
+                  alt=""
+                />
+              </div>
+              <div>
+                <h2 className="text-[20px]">
+                  {selectedFilm.title || selectedFilm.name}
+                  <span className="ml-2 text-[16px] font-thin text-slate-400">
+                    {selectedFilm?.first_air_date?.split("-")[0] ||
+                      selectedFilm?.release_date?.split("-")[0]}
+                  </span>
+                </h2>
+                <p className="flex m-0 text-[14px] font-medium text-slate-400">
+                  {getSelectedGenres(selectedFilm.genre_ids)}
+                </p>
+                <p className="m-0 text-[14px] font-medium text-slate-400">
+                  TMDb Rating:
+                  <span className="ml-1 text-[16px] text-slate-300">
+                    {selectedFilm.vote_average.toFixed(1)}
+                  </span>
+                  /10
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div className="text-white font-thin text-sm">
+              <p>{selectedFilm.overview}</p>
+            </div>
+            <hr />
+            <div>
+              <p>Stars</p>
+              <p>Leave a review</p>
+            </div>
+            <hr />
+            <Button variant="primary" onClick={handleClose} className="w-full">
+              Submit
+            </Button>
+          </Modal.Body>
+        </Modal>
+      )}
     </div>
   );
 }

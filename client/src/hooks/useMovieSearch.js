@@ -3,11 +3,13 @@ import {
   fetchTrendingMovies,
   fetchTrendingShows,
   fetchSearchMovies,
+  fetchGenres,
 } from "../utils/api/tmdb";
 
 export const useMovieSearch = () => {
   const [trendingMovies, setTrendingMovies] = useState(["test"]);
   const [trendingShows, setTrendingShows] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -31,6 +33,15 @@ export const useMovieSearch = () => {
     }
   };
 
+  const getGenres = async () => {
+    try {
+      const data = await fetchGenres();
+      setGenres(data.genres);
+    } catch (error) {
+      setError("Error fetching genres ", error);
+    }
+  };
+
   // Run this and update movies state when a movie is searched
   const movieSearch = async (query) => {
     try {
@@ -48,9 +59,11 @@ export const useMovieSearch = () => {
     movieSearch,
     trendingMoviesSearch,
     trendingShowsSearch,
+    getGenres,
     trendingMovies,
     trendingShows,
     movies,
+    genres,
     loading,
     error,
   };
